@@ -1,5 +1,5 @@
 {
-  "name": "aem-wknd-theme",
+  "name": "wknd",
   "version": "1.0.0",
   "description": "Generates an AEM Frontend project with Webpack",
   "repository": {
@@ -17,7 +17,8 @@
     "chokidar": "chokidar -c \"clientlib\" ./dist",
     "aemsyncro": "aemsync -w ../ui.apps/src/main/content",
     "watch": "npm-run-all --parallel start chokidar aemsyncro",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "build": "webpack --config ./webpack.theme.prod.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
