@@ -59,6 +59,7 @@ import jQuery from "jquery";
             });
     }
 
+    console.log("loaded");
     document.getElementById("wknd-contact-us-form-submit").onclick = submitContactUsForm;
 
     /**
