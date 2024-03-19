@@ -39,7 +39,28 @@ import jQuery from "jquery";
 			}
 		}
     };
-    
+
+    function submitContactUsForm() {
+        const username = document.getElementById("wknd-contact-us-form-username").value;
+        const time = Date.now();
+        const myRequest = new Request("/us/en/about-us.html?username=" + username + "&time=" + time);
+
+        fetch(myRequest)
+            .then((response) => {
+                if (!response.ok) {
+                    console.log(response);
+                    document.getElementById("cmp-contactus-error").innerHTML = "Error: " + response.status;
+                } else {
+                    console.log(response.status);
+                    window.location.href = "/us/en/about-us.html?username=" + username + "&time=" + time;
+                }
+
+                return response.blob();
+            });
+    }
+
+    document.getElementById("wknd-contact-us-form-submit").onclick = submitContactUsForm;
+
     /**
      * Generate an indented list of links from a nav. Meant for use with panel().
      * @return {jQuery} jQuery object.
@@ -217,15 +238,15 @@ import jQuery from "jquery";
 
                 }
 
-                
+
             // Event: Touch stuff.
                 $this.on('touchstart.noPreventDefault', function(event) {
-                    
+
                     $this.touchPosX = event.originalEvent.touches[0].pageX;
                     $this.touchPosY = event.originalEvent.touches[0].pageY;
 
                 })
-                
+
                 $this.on('touchmove.noPreventDefault', function(event) {
 
                     if ($this.touchPosX === null
@@ -289,7 +310,7 @@ import jQuery from "jquery";
                         }
 
                 });
-                
+
             // Event: Prevent certain events inside the panel from bubbling.
                 $this.on('click touchend touchstart touchmove', function(event) {
                     event.stopPropagation();
